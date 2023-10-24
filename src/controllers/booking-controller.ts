@@ -13,6 +13,13 @@ export async function getBooking(req: AuthenticatedRequest, res: Response) {
   });
 }
 
+export async function getBookingsByRoomId(req: AuthenticatedRequest, res: Response) {
+  const roomId = Number(req.params.roomId);
+
+  const bookings = await bookingService.getBookingsByRoomId(roomId);
+  return res.status(httpStatus.OK).send(bookings);
+}
+
 export async function bookRoom(req: AuthenticatedRequest, res: Response) {
   const { userId } = req;
   const roomId = Number(req.body.roomId);
